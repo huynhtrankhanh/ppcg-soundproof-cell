@@ -5,6 +5,8 @@ on: push
 jobs:
   write-numbers:
     runs-on: ubuntu-latest
+    permissions:
+      - contents: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
