@@ -8,24 +8,13 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
       - name: Write Random Numbers
         run: |
-          const fs = require('fs');
-          const crypto = require('crypto');
-
-          const numIntegers = 1000000;
-
-          let outputString = '';
-          for (let i = 0; i < numIntegers; i++) {
-            const randomInteger = crypto.randomInt(0, 1000000001);
-            outputString += `${randomInteger} `;
-          }
-
-          // Write the output to a new file in the repository
-          fs.writeFileSync('random_numbers.txt', outputString);
-
-          // Print a success message
-          console.log('Random numbers have been written to random_numbers.txt');
+          node generate-numbers.js
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
